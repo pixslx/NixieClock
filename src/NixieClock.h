@@ -7,6 +7,10 @@ class NixieClock {
 		unsigned char ss;
 		unsigned char mm;
 		unsigned char hh;
+
+		unsigned char set;
+		unsigned char setPos;
+
 		NixieDisplay* display;
 
 	public:
