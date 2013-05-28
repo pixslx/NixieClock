@@ -1,4 +1,5 @@
 #include "PCF8574.h"
+#include "Time.h"
 
 class NixieDisplay {
 	private:
@@ -9,5 +10,5 @@ class NixieDisplay {
 
 	public:
 		NixieDisplay(void);
-		void display(unsigned char, unsigned char, unsigned char);
+		void display(Time);
 };

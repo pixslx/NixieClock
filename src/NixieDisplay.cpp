@@ -9,8 +9,8 @@ NixieDisplay::NixieDisplay() {
 	expHH = new PCF8574(0x72);
 }
 
-void NixieDisplay::display(unsigned char hh, unsigned char mm, unsigned char ss) {
-	expSS->write(map[ss & 0x0F] | (map[(ss & 0xF0) >> 4] << 4));
-	expMM->write(map[mm & 0x0F] | (map[(mm & 0xF0) >> 4] << 4));
-	expHH->write(map[hh & 0x0F] | (map[(hh & 0xF0) >> 4] << 4));
+void NixieDisplay::display(Time time) {
+	expSS->write(map[time.s1] | (map[time.s10] << 4));
+	expMM->write(map[time.m1] | (map[time.m10] << 4));
+	expHH->write(map[time.h1] | (map[time.h10] << 4));
 }

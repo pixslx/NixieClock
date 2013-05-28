@@ -1,12 +1,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "NixieDisplay.h"
+#include "Time.h"
 
 class NixieClock {
 	private:
-		unsigned char ss;
-		unsigned char mm;
-		unsigned char hh;
+		Time time;
 
 		unsigned char set;
 		unsigned char setPos;

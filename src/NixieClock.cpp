@@ -2,9 +2,8 @@
 #include "operators.h"
 
 NixieClock::NixieClock(void) {
-	display = new NixieDisplay();
-	hh = 0x00; mm = 0x00; ss = 0x00;
-	display->display(0x00,0x00,0x00);
+	display = new NixieDisplay();	
+	display->display(time);
 
 	set = 0;
 
@@ -18,26 +17,8 @@ NixieClock::NixieClock(void) {
 
 void NixieClock::clock(void) {
 	if(!set) {
-		ss++;
-	
-		if((ss & 0x0F) == 0x0A) ss += 6;
-		if(ss == 0x60) {
-			ss = 0x00;
-			mm++;
-		}
-
-		if((mm & 0x0F) == 0x0A) mm += 6;
-		if(mm == 0x60) {
-			mm = 0x00;
-			hh++;
-		}
-
-		if((hh & 0x0F) == 0x0A) hh += 6;
-		if(hh == 0x24) {
-			hh = 0x00;
-		}
-
-		display->display(hh,mm,ss);
+		time++;
+		display->display(time);
 	}
 }
 
@@ -53,7 +34,13 @@ void NixieClock::setKeyHandler(void) {
 
 void NixieClock::upKeyHandler(void) {
 	if(set) {
-		clock();
+		if(setPos == 1) time.incH10();
+		else if(setPos == 2) time.incH1();
+		else if(setPos == 3) time.incM10();
+		else if(setPos == 4) time.incM1();
+		else if(setPos == 5) time.incS10();
+		else if(setPos == 6) time.incS1();
+		display->display(time);
 	}
 }
 
