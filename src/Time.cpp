@@ -52,28 +52,30 @@ Time* Time::clone(void) {
 }
 
 void Time::incH1(void) {
-	h1++;
-	if(h10 == 2 && h1 == 4) h1 = 0;
+	if(h10 == 2 && h1 == 3) h1 = 0;
+	else if(h1 == 9) h1 = 0;
+	else h1++;
 }
 void Time::incH10(void) {
-	h10++;
-	if(h10 == 2) h10 = 0;
+	if(h10 == 1 && h1 > 3) h10 = 0;
+	else if(h10 == 2) h10 = 0;
+	else h10++;
 }
 
 void Time::incM1(void) {
-	m1++;
-	if(m1 == 10) m1 = 0;
+	if(m1 == 9) m1 = 0;
+	else m1++;
 }
 void Time::incM10(void) {
-	m10++;
-	if(m10 == 6) m10 = 0;
+	if(m10 == 5) m10 = 0;
+	else m10++;
 }
 
 void Time::incS1(void) {
-	s1++;
-	if(s1 == 10) s1 = 0;
+	if(s1 == 9) s1 = 0;
+	else s1++;
 }
 void Time::incS10(void) {
-	s10++;
-	if(s10 == 6) s10 = 0;
+	if(s10 == 5) s10 = 0;
+	else s10++;
 }

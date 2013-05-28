@@ -5,10 +5,12 @@
 
 class NixieClock {
 	private:
-		Time time;
+		Time* time;
+		Time* tmpTime;
 
 		unsigned char set;
 		unsigned char setPos;
+		unsigned char setChange;
 
 		NixieDisplay* display;
 

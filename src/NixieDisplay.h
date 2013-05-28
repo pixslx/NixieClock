@@ -10,5 +10,5 @@ class NixieDisplay {
 
 	public:
 		NixieDisplay(void);
-		void display(Time);
+		void display(Time*);
 };

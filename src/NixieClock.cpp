@@ -2,6 +2,8 @@
 #include "operators.h"
 
 NixieClock::NixieClock(void) {
+	time = new Time();
+
 	display = new NixieDisplay();	
 	display->display(time);
 
@@ -16,31 +18,39 @@ NixieClock::NixieClock(void) {
 }
 
 void NixieClock::clock(void) {
-	if(!set) {
-		time++;
-		display->display(time);
-	}
+	(*time)++;
+	if(!set) display->display(time);
 }
 
 void NixieClock::setKeyHandler(void) {
 	if(!set) {
 		set = 1;
-		setPos = 1;
+		setPos = 1;		
+		setChange = 0;
+		delete tmpTime;
+		tmpTime = time->clone();
 	} else {
-		if(setPos == 6) set = 0;
+		if(setPos == 6) {
+			set = 0;
+			if(setChange) {
+				delete time;
+				time = tmpTime->clone();
+			}
+		}
 		else setPos++;
 	}
 }
 
 void NixieClock::upKeyHandler(void) {
 	if(set) {
-		if(setPos == 1) time.incH10();
-		else if(setPos == 2) time.incH1();
-		else if(setPos == 3) time.incM10();
-		else if(setPos == 4) time.incM1();
-		else if(setPos == 5) time.incS10();
-		else if(setPos == 6) time.incS1();
-		display->display(time);
+		setChange = 1;
+		if(setPos == 6) tmpTime->incH10();
+		else if(setPos == 5) tmpTime->incH1();
+		else if(setPos == 4) tmpTime->incM10();
+		else if(setPos == 3) tmpTime->incM1();
+		else if(setPos == 2) tmpTime->incS10();
+		else if(setPos == 1) tmpTime->incS1();
+		display->display(tmpTime);
 	}
 }
 
