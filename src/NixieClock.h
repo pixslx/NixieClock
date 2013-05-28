@@ -2,6 +2,7 @@
 #include <avr/interrupt.h>
 #include "NixieDisplay.h"
 #include "Time.h"
+#include "PCF8583.h"
 
 class NixieClock {
 	private:
@@ -13,6 +14,8 @@ class NixieClock {
 		unsigned char setChange;
 
 		NixieDisplay* display;
+
+		PCF8583* i2cClock;
 
 	public:
 		NixieClock(void);

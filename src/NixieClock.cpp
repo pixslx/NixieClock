@@ -7,6 +7,9 @@ NixieClock::NixieClock(void) {
 	display = new NixieDisplay();	
 	display->display(time);
 
+	i2cClock = new PCF8583(0xA0);
+	i2cClock->setClockModeNotimerNoalarm();
+
 	set = 0;
 
 	DDRD = 0<<PD3;
@@ -35,6 +38,7 @@ void NixieClock::setKeyHandler(void) {
 			if(setChange) {
 				delete time;
 				time = tmpTime->clone();
+				i2cClock->setTime(time);
 			}
 		}
 		else setPos++;

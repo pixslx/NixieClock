@@ -8,6 +8,9 @@
 
 class I2C {
 	public:
+		static const unsigned char READ_BIT = 1;
+		static const unsigned char WRITE_BIT = 0;
+
 		/*************************************************************************
 		 Initialization of the I2C bus interface. Need to be called only once
 		*************************************************************************/
